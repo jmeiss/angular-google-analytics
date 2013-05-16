@@ -2,9 +2,9 @@
 
 'use strict';
 
-describe('angular-google-analytics', function(){
+describe('google-analytics', function(){
 
-    beforeEach(module('angular-google-analytics'));
+    beforeEach(module('google-analytics'));
     beforeEach(module(function(AnalyticsProvider) {
       AnalyticsProvider.setAccount('UA-XXXXXX-xx');
     }));
@@ -27,9 +27,9 @@ describe('angular-google-analytics', function(){
         });
       });
 
-      it('should generate an trackpage to routeChangeSuccess', function() {
+      it('should generate an trackpage to viewContentLoaded', function() {
         inject(function(Analytics, $rootScope) {
-          $rootScope.$broadcast('$routeChangeSuccess');
+          $rootScope.$broadcast('$viewContentLoaded');
           expect(Analytics._logs.length).toBe(1);
         });
       });
@@ -40,9 +40,9 @@ describe('angular-google-analytics', function(){
       AnalyticsProvider.trackPages(false);
     }));
 
-    it('should NOT generate an trackpage to routeChangeSuccess', function() {
+    it('should NOT generate an trackpage to viewContentLoaded', function() {
       inject(function(Analytics, $rootScope) {
-        $rootScope.$broadcast('$routeChangeSuccess');
+        $rootScope.$broadcast('$viewContentLoaded');
         expect(Analytics._logs.length).toBe(0);
       });
     });
