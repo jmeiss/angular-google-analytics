@@ -9,6 +9,10 @@ angular.module('google-analytics', [])
       this.accountId = accountId;
       return true;
     };
+    this.setDomainName = function(domainName) {
+      this.domainName = domainName;
+      return true;
+    };
     this.trackPages = function(shouldTrackPages) {
       this.shouldTrackPages = shouldTrackPages;
       return true;
@@ -16,7 +20,8 @@ angular.module('google-analytics', [])
 
     this.$get = ['$document', '$rootScope', '$location', '$window', function($document, $rootScope, $location, $window) {
       var accountId = this.accountId,
-          shouldTrackPages = this.shouldTrackPages;
+          shouldTrackPages = this.shouldTrackPages,
+          domainName = this.domainName;
 
       // private methods
       function _createScriptTag() {
@@ -31,6 +36,7 @@ angular.module('google-analytics', [])
         
         $window._gaq = [];
         $window._gaq.push(['_setAccount', accountId]);
+        $window._gaq.push(['_setDomainName', domainName]);
 
         if (shouldTrackPages) {
           $window._gaq.push(['_trackPageview']);
