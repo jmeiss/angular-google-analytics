@@ -13,21 +13,26 @@ Proudly brought to you by the [@revolunet](http://twitter.com/revolunet) team.
 ## example
 
 ```js
-var app = angular.module('app', ['angular-google-analytics'])
-    .config(function(AnalyticsProvider, function() {
-        // initial configuration
-        AnalyticsProvider.setAccount('UA-XXXXX-xx');
+var app = angular.module('app', ['google-analytics'])
+  .config(function(AnalyticsProvider, function() {
+    // initial configuration
+    AnalyticsProvider.setAccount('UA-XXXXX-xx');
+    
+    // Set DomainName to 'none' if you want to track localhost events, unless comment this line
+    AnalyticsProvider.setDomainName('none');
 
-        // track all routes (or not)
-        AnalyticsProvider.trackPages(true);
-    }))
-    .controller('SampleController', function(Analytic) {
-        // create a new pageview event
-        Analytic.trackPage('/video/detail/XXX');
+    // track all routes (or not)
+    AnalyticsProvider.trackPages(true);
+  }))
+  .controller('SampleController', function(Analytics) {
+    // create a new pageview event
+    Analytics.trackPage('/video/detail/XXX');
 
-        // create a new tracking event
-        Analytic.trackEvent('video', 'play', 'django.mp4');
-    });
+    // create a new tracking event
+    Analytics.trackEvent('video', 'play', 'django.mp4');
+  })
+  // Inject Analytics Provider in you main controller to turn on tracking
+  .controller('MainCtrl', function (Analytics) { }
 ```
 
 ## configuration
@@ -37,6 +42,10 @@ var app = angular.module('app', ['angular-google-analytics'])
 AnalyticsProvider.setAccount('UA-XXXXX-xx');
 // automatic route tracking (default=true)
 AnalyticsProvider.trackPages(false);
+
+// Inject Analytics Provider in you main controller to turn on tracking
+angular.module('app', ['angular-google-analytics'])
+    .controller('MainCtrl', function (Analytics) { }
 ```
 
 ## Licence
