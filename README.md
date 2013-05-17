@@ -40,8 +40,12 @@ var app = angular.module('app', ['google-analytics'])
 ```js
 // setup your account
 AnalyticsProvider.setAccount('UA-XXXXX-xx');
+
 // automatic route tracking (default=true)
 AnalyticsProvider.trackPages(false);
+
+// track all routes (or not)
+AnalyticsProvider.trackPages(true);
 
 // Instanciate Analytics Provider in run block to create and use it to kickstart the application
 angular.module('app', ['google-analytics'])
