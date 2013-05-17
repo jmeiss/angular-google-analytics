@@ -24,6 +24,8 @@ var app = angular.module('app', ['google-analytics'])
     // track all routes (or not)
     AnalyticsProvider.trackPages(true);
   }))
+  // Instanciate Analytics Provider in run block to create and use it to kickstart the application
+  .run(function (Analytics) { })
   .controller('SampleController', function(Analytics) {
     // create a new pageview event
     Analytics.trackPage('/video/detail/XXX');
@@ -31,8 +33,6 @@ var app = angular.module('app', ['google-analytics'])
     // create a new tracking event
     Analytics.trackEvent('video', 'play', 'django.mp4');
   })
-  // Inject Analytics Provider in you main controller to turn on tracking
-  .controller('MainCtrl', function (Analytics) { }
 ```
 
 ## configuration
@@ -43,9 +43,9 @@ AnalyticsProvider.setAccount('UA-XXXXX-xx');
 // automatic route tracking (default=true)
 AnalyticsProvider.trackPages(false);
 
-// Inject Analytics Provider in you main controller to turn on tracking
-angular.module('app', ['angular-google-analytics'])
-    .controller('MainCtrl', function (Analytics) { }
+// Instanciate Analytics Provider in run block to create and use it to kickstart the application
+angular.module('app', ['google-analytics'])
+  .run(function (Analytics) { })
 ```
 
 ## Licence
